@@ -11,7 +11,7 @@ Because writing plumbing code is dumb and repetitive.
 
 ## How?
 
-IL-weaving after the code has compiled, bro.
+IL-weaving after the code is compiled, bro.
 
 For example, imagine you've got this code to serialize an object to the filesystem:
 
@@ -41,7 +41,7 @@ After the code builds, the weaver could scan your assembly looking for code whic
             }
             catch (Exception ex)
             {
-                Fody.ErrorHandling.HandleException(ex);
+                AsyncErrorHandling.HandleException(ex);
             } 
         }
     }
