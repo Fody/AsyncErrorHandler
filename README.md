@@ -1,9 +1,9 @@
-Fody.ErrorHandling
+Fody.AsyncErrorHandling
 ==================
 
 ## What?
 
-Fody.ErrorHandling is an extension for weaving exception handling code into applications which use async code.
+Fody.AsyncErrorHandling is an extension for weaving exception handling code into applications which use async code.
 
 ## Why?
 
