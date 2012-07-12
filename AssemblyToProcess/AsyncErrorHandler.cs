@@ -1,6 +1,6 @@
 using System;
 
-public class AsyncErrorHandler
+public static class AsyncErrorHandler
 {
     public static Exception Exception;
     public static void HandleException(Exception exception)

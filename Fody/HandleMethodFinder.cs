@@ -17,25 +17,25 @@ public class HandleMethodFinder
         HandleMethod = errorHandler.Methods.FirstOrDefault(x => x.Name == "HandleException");
         if (HandleMethod == null)
         {
-            throw new WeavingException(string.Format("Could not find 'Initialize' method on '{0}'.", errorHandler.FullName));
+            throw new WeavingException("Could not find 'Initialize' method on '{0}'.");
         }
         if (!HandleMethod.IsPublic)
         {
-            throw new WeavingException(string.Format("Method '{0}' is not public.", HandleMethod.FullName));
+            throw new WeavingException("Method 'AsyncErrorHandler.HandleException' is not public.");
         }
         if (!HandleMethod.IsStatic)
         {
-            throw new WeavingException(string.Format("Method '{0}' is not static.", HandleMethod.FullName));
+            throw new WeavingException("Method 'AsyncErrorHandler.HandleException' is not static.");
         }
         if (HandleMethod.Parameters.Count != 1)
         {
-            throw new WeavingException(string.Format("Method '{0}' must have 1 parameter of type 'System.Exception'.", HandleMethod.FullName));
+            throw new WeavingException("Method 'AsyncErrorHandler.HandleException' must have only 1 parameter that is of type 'System.Exception'.");
         }
         var parameterDefinition = HandleMethod.Parameters.First();
         var parameterType = parameterDefinition.ParameterType;
         if (parameterType.FullName != "System.Exception")
         {
-            throw new WeavingException(string.Format("Method '{0}' must have 1 parameter of type 'System.Exception'.", HandleMethod.FullName));
+            throw new WeavingException("Method 'AsyncErrorHandler.HandleException' must have only 1 parameter that is of type 'System.Exception'.");
         }
 
     }
