@@ -1,9 +1,9 @@
-Fody.AsyncErrorHandling
+Fody.AsyncErrorHandler
 ==================
 
 ## What?
 
-Fody.AsyncErrorHandling is an extension for weaving exception handling code into applications which use async code.
+Fody.AsyncErrorHandler is a [Fody](https://github.com/SimonCropp/Fody) extension for weaving exception handling code into applications which use async code.
 
 ## Why?
 
@@ -39,21 +39,21 @@ After the code builds, the weaver could scan your assembly looking for code whic
                 using (var stream = new StreamWriter(file))
                     await stream.WriteAsync(jsonValue);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                AsyncErrorHandling.HandleException(ex);
+                AsyncErrorHandler.HandleException(exception);
             } 
         }
     }
 
 And your application could provide its own implementation of the error handling module:
 
-    public class DefaultExceptionHandler : IExceptionHandler
+
+    public static class AsyncErrorHandler
     {
-        public void HandleException(ExceptionEventArgs args)
+        public static void HandleExcption(Exception exception)
         {
-           // TODO: whatever you want to log about the exception
-           args.Handled = true;
+            Debug.WriteLine(exception);
         }
     }
 
