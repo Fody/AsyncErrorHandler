@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>AsyncErrorHandler.Fody</id>
+    <version>$version$</version>
+    <title>AsyncErrorHandler.Fody</title>
+    <authors>Brendan Forster</authors>
+    <owners>Brendan Forster</owners>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+    <projectUrl>https://github.com/shiftkey/Fody.AsyncErrorHandler</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An extension for Fody to integrate error handling into async and TPL code.</description>
+    <summary />
+    <language>en-AU</language>
+    <tags>Async, Exception Handling, ILWeaving, Fody, Cecil</tags>
+  </metadata>
+</package>
