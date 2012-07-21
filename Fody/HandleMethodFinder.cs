@@ -17,7 +17,7 @@ public class HandleMethodFinder
         HandleMethod = errorHandler.Methods.FirstOrDefault(x => x.Name == "HandleException");
         if (HandleMethod == null)
         {
-            throw new WeavingException("Could not find 'Initialize' method on '{0}'.");
+            throw new WeavingException(string.Format("Could not find 'HandleException' method on '{0}'.", errorHandler.FullName));
         }
         if (!HandleMethod.IsPublic)
         {
