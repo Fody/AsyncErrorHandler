@@ -51,7 +51,7 @@ And your application could provide its own implementation of the error handling 
 
     public static class AsyncErrorHandler
     {
-        public static void HandleExcption(Exception exception)
+        public static void HandleException(Exception exception)
         {
             Debug.WriteLine(exception);
         }
