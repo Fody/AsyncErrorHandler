@@ -50,9 +50,9 @@
     <Reference Include="Mono.Cecil.Rocks">
       <HintPath>..\packages\Mono.Cecil.0.9.5.3\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.6.1.12217, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -65,9 +65,12 @@
   <ItemGroup>
     <Compile Include="AssemblyExtensions.cs" />
     <Compile Include="AsyncTestingTests.cs" />
+    <Compile Include="InSameAssemblyTests.cs" />
+    <Compile Include="MockAssemblyResolver.cs" />
     <Compile Include="Verifier.cs" />
     <Compile Include="TaskTests.cs" />
     <Compile Include="WeaverHelper.cs" />
+    <Compile Include="WithHandlerInReferenceTests.cs" />
     <Compile Include="XmlExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +88,11 @@
       <Project>{7dec4e2d-f872-434e-a267-0bad65299950}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <Name>AssemblyToProcess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AssemblyWithHandlerInReference\AssemblyWithHandlerInReference.csproj">
+      <Project>{bab0cb71-bd17-4d16-97ad-751ff53515f4}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <Name>AssemblyWithHandlerInReference</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fody\Fody.csproj">
       <Project>{C3578A7B-09A6-4444-9383-0DEAFA4958BD}</Project>
