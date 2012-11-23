@@ -1,29 +1,28 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using System.Threading;
 using NUnit.Framework;
 
-[TestFixture]
 public class TaskTests
 {
     string projectPath;
     Assembly assembly;
     FieldInfo exceptionField;
 
-    public  TaskTests()
+	public TaskTests(string projectPath)
     {
-        projectPath = @"AssemblyToProcess\AssemblyToProcess.csproj";
+		this.projectPath = projectPath;
 #if (!DEBUG)
-        projectPath = projectPath.Replace("Debug", "Release");
+        this.projectPath = this.projectPath.Replace("Debug", "Release");
 #endif
-    }
-
-    [TestFixtureSetUp]
-    public void Setup()
-    {
-        var weaverHelper = new WeaverHelper(projectPath);
+		var weaverHelper = new WeaverHelper(this.projectPath);
         assembly = weaverHelper.Assembly;
-        var errorHandler = assembly.GetType("AsyncErrorHandler");
+
+		var directoryName = Path.GetDirectoryName(assembly.Location);
+	    var combine = Path.Combine(directoryName, "AssemblyToProcess.dll");
+	    var loadFile = Assembly.LoadFrom(combine);
+	    var errorHandler = loadFile.GetType("AsyncErrorHandler");
         exceptionField = errorHandler.GetField("Exception");
     }
 
