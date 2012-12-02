@@ -19,17 +19,21 @@ public class WeaverHelper
 
         var newAssembly = assemblyPath.Replace(".dll", "2.dll");
         File.Copy(assemblyPath, newAssembly, true);
-
+		var assemblyResolver = new MockAssemblyResolver
+		{
+			Directory = Path.GetDirectoryName(assemblyPath)
+		};
         var moduleDefinition = ModuleDefinition.ReadModule(newAssembly);
         var weavingTask = new ModuleWeaver
         {
-            ModuleDefinition = moduleDefinition
+            ModuleDefinition = moduleDefinition,
+			AssemblyResolver = assemblyResolver
         };
 
         weavingTask.Execute();
         moduleDefinition.Write(newAssembly);
 
-        Assembly = Assembly.LoadFile(newAssembly);
+		Assembly = Assembly.LoadFrom(newAssembly);
     }
 
     void GetAssemblyPath()
