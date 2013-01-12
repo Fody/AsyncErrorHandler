@@ -3,7 +3,7 @@ Fody.AsyncErrorHandler
 
 ## What?
 
-Fody.AsyncErrorHandler is a [Fody](https://github.com/SimonCropp/Fody) extension for weaving exception handling code into applications which use async code.
+Fody.AsyncErrorHandler is a [Fody](https://github.com/Fody/Fody) extension for weaving exception handling code into applications which use async code.
 
 ## Why?
 
