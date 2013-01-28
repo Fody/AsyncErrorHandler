@@ -71,7 +71,6 @@
     <Compile Include="Verifier.cs" />
     <Compile Include="WeaverHelper.cs" />
     <Compile Include="WithHandlerInReferenceTests.cs" />
-    <Compile Include="XmlExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
