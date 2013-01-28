@@ -1,72 +1,43 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Xml.Linq;
+﻿using System.IO;
 using Mono.Cecil;
+using Mono.Cecil.Pdb;
 
-public class WeaverHelper
+public static class WeaverHelper
 {
-    string projectPath;
-    string assemblyPath;
-    public Assembly Assembly { get; set; }
 
-    public WeaverHelper(string projectPath)
+    public static string Weave(string assemblyPath)
     {
-        this.projectPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"..\..\..\", projectPath));
-
-        GetAssemblyPath();
-
         var newAssembly = assemblyPath.Replace(".dll", "2.dll");
+        var oldpdb = assemblyPath.Replace(".dll", ".pdb");
+        var newpdb = assemblyPath.Replace(".dll", "2.pdb");
         File.Copy(assemblyPath, newAssembly, true);
-		var assemblyResolver = new MockAssemblyResolver
-		{
-			Directory = Path.GetDirectoryName(assemblyPath)
-		};
-        var moduleDefinition = ModuleDefinition.ReadModule(newAssembly);
-        var weavingTask = new ModuleWeaver
+        File.Copy(oldpdb, newpdb, true);
+
+        var assemblyResolver = new MockAssemblyResolver
         {
-            ModuleDefinition = moduleDefinition,
-			AssemblyResolver = assemblyResolver
+            Directory = Path.GetDirectoryName(assemblyPath)
         };
 
-        weavingTask.Execute();
-        moduleDefinition.Write(newAssembly);
+        using (var symbolStream = File.OpenRead(newpdb))
+        {
+            var readerParameters = new ReaderParameters
+            {
+                ReadSymbols = true,
+                SymbolStream = symbolStream,
+                SymbolReaderProvider = new PdbReaderProvider()
+            };
+            var moduleDefinition = ModuleDefinition.ReadModule(newAssembly, readerParameters);
 
-		Assembly = Assembly.LoadFrom(newAssembly);
+            var weavingTask = new ModuleWeaver
+            {
+                ModuleDefinition = moduleDefinition,
+                AssemblyResolver = assemblyResolver
+            };
+
+            weavingTask.Execute();
+            moduleDefinition.Write(newAssembly);
+
+            return newAssembly;
+        }
     }
-
-    void GetAssemblyPath()
-    {
-        assemblyPath = Path.Combine(Path.GetDirectoryName(projectPath), GetOutputPathValue(), GetAssemblyName() + ".dll");
-    }
-
-    string GetAssemblyName()
-    {
-        var xDocument = XDocument.Load(projectPath);
-        xDocument.StripNamespace();
-
-        return xDocument.Descendants("AssemblyName")
-            .Select(x => x.Value)
-            .First();
-    }
-
-    string GetOutputPathValue()
-    {
-        var xDocument = XDocument.Load(projectPath);
-        xDocument.StripNamespace();
-
-        var outputPathValue = (from propertyGroup in xDocument.Descendants("PropertyGroup")
-                               let condition = ((string)propertyGroup.Attribute("Condition"))
-                               where (condition != null) &&
-                                     (condition.Trim() == "'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'")
-                               from outputPath in propertyGroup.Descendants("OutputPath")
-                               select outputPath.Value).First();
-#if (!DEBUG)
-            outputPathValue = outputPathValue.Replace("Debug", "Release");
-#endif
-        return outputPathValue;
-    }
-
-
 }
