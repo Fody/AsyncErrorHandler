@@ -80,11 +80,9 @@ public class WithHandlerInReferenceTests
         return (Exception) exceptionField.GetValue(null);
     }
 
-#if (DEBUG)
     [Test]
     public void PeVerify()
     {
         Verifier.Verify(beforeAssemblyPath,beforeAssemblyPath);
     }
-#endif
 }

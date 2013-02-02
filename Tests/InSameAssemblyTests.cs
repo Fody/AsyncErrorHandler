@@ -5,7 +5,7 @@ using System.Threading;
 using NUnit.Framework;
 
 [TestFixture]
-public class InSameAssemblyTests 
+public class InSameAssemblyTests
 {
     string beforeAssemblyPath;
     Assembly assembly;
@@ -13,8 +13,8 @@ public class InSameAssemblyTests
     string afterAssemblyPath;
 
     public InSameAssemblyTests()
-	{
-        this.beforeAssemblyPath =Path.GetFullPath(@"..\..\..\AssemblyToProcess\bin\debug\AssemblyToProcess.dll");
+    {
+        this.beforeAssemblyPath = Path.GetFullPath(@"..\..\..\AssemblyToProcess\bin\debug\AssemblyToProcess.dll");
 #if (!DEBUG)
         this.beforeAssemblyPath = this.beforeAssemblyPath.Replace("debug", "Release");
 #endif
@@ -24,7 +24,7 @@ public class InSameAssemblyTests
         assembly = Assembly.LoadFrom(afterAssemblyPath);
         var errorHandler = assembly.GetType("AsyncErrorHandler");
         exceptionField = errorHandler.GetField("Exception");
-	}
+    }
 
     [Test]
     public void Method()
@@ -75,12 +75,10 @@ public class InSameAssemblyTests
     {
         return (Exception) exceptionField.GetValue(null);
     }
-    
-#if (DEBUG)
+
     [Test]
     public void PeVerify()
     {
-        Verifier.Verify(beforeAssemblyPath,beforeAssemblyPath);
+        Verifier.Verify(beforeAssemblyPath, beforeAssemblyPath);
     }
-#endif
 }
