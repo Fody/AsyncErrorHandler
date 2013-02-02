@@ -16,7 +16,7 @@ public class InSameAssemblyTests
 	{
         this.beforeAssemblyPath =Path.GetFullPath(@"..\..\..\AssemblyToProcess\bin\debug\AssemblyToProcess.dll");
 #if (!DEBUG)
-        this.beforeAssemblyPath = this.beforeAssemblyPath.Replace("Debug", "Release");
+        this.beforeAssemblyPath = this.beforeAssemblyPath.Replace("debug", "Release");
 #endif
         afterAssemblyPath = WeaverHelper.Weave(this.beforeAssemblyPath);
 
