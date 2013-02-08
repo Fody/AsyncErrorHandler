@@ -14,11 +14,11 @@ public class InSameAssemblyTests
 
     public InSameAssemblyTests()
     {
-        this.beforeAssemblyPath = Path.GetFullPath(@"..\..\..\AssemblyToProcess\bin\debug\AssemblyToProcess.dll");
+        beforeAssemblyPath = Path.GetFullPath(@"..\..\..\AssemblyToProcess\bin\debug\AssemblyToProcess.dll");
 #if (!DEBUG)
-        this.beforeAssemblyPath = this.beforeAssemblyPath.Replace("debug", "Release");
+        beforeAssemblyPath = this.beforeAssemblyPath.Replace("debug", "Release");
 #endif
-        afterAssemblyPath = WeaverHelper.Weave(this.beforeAssemblyPath);
+        afterAssemblyPath = WeaverHelper.Weave(beforeAssemblyPath);
 
 
         assembly = Assembly.LoadFrom(afterAssemblyPath);

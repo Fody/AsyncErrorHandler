@@ -14,11 +14,11 @@ public class WithHandlerInReferenceTests
 
     public WithHandlerInReferenceTests()
     {
-        this.beforeAssemblyPath = Path.GetFullPath(@"..\..\..\AssemblyWithHandlerInReference\bin\debug\AssemblyWithHandlerInReference.dll");
+        beforeAssemblyPath = Path.GetFullPath(@"..\..\..\AssemblyWithHandlerInReference\bin\debug\AssemblyWithHandlerInReference.dll");
 #if (!DEBUG)
-        this.beforeAssemblyPath = this.beforeAssemblyPath.Replace("debug", "Release");
+        beforeAssemblyPath = this.beforeAssemblyPath.Replace("debug", "Release");
 #endif
-        afterAssemblyPath = WeaverHelper.Weave(this.beforeAssemblyPath);
+        afterAssemblyPath = WeaverHelper.Weave(beforeAssemblyPath);
 
 
         assembly = Assembly.LoadFrom(afterAssemblyPath);

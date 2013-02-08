@@ -7,7 +7,7 @@
     <authors>Brendan Forster</authors>
     <owners>Brendan Forster</owners>
     <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
-    <projectUrl>https://github.com/shiftkey/Fody.AsyncErrorHandler</projectUrl>
+    <projectUrl>https://github.com/Fody/Fody.AsyncErrorHandler</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>An extension for Fody to integrate error handling into async and TPL code.</description>
     <summary />
