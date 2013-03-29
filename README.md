@@ -7,6 +7,14 @@ Fody.AsyncErrorHandler is a [Fody](https://github.com/Fody/Fody) extension for w
 
 [Introduction to Fody](https://github.com/Fody/Fody/wiki/SampleUsage)
 
+## Nuget
+
+Nuget package http://nuget.org/packages/AsyncErrorHandler.Fody 
+
+To Install from the Nuget Package Manager Console 
+    
+    PM> Install-Package AsyncErrorHandler.Fody
+    
 ## Why?
 
 Because writing plumbing code is dumb and repetitive.
