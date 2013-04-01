@@ -174,3 +174,9 @@ So when AsyncErrorHandler does its weaving it searches for "SetException(excepti
         this.<>t__builder.SetException(exception);
         return;
     }
+    
+        
+## Icon
+
+Icon courtesy of [The Noun Project](http://thenounproject.com)
+
