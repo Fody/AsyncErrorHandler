@@ -100,7 +100,7 @@ So "Method" has become a stub that calls into a state machine.
 The state machine will look like this
 
     [CompilerGenerated]
-    private struct <Method>d__0 : IAsyncStateMachine
+    struct <Method>d__0 : IAsyncStateMachine
     {
         // Fields
         public int <>1__state;
@@ -116,9 +116,9 @@ The state machine will look like this
     }
 
 
-The method we care about is "MoveNext". It will look something like this
+The method we care about is `MoveNext`. It will look something like this
 
-	private void MoveNext()
+	void MoveNext()
 	{
 	    try
 	    {
@@ -163,9 +163,9 @@ The method we care about is "MoveNext". It will look something like this
 	}
 
 
-Most of that can be ignored. The important thing to note is that it is swallowing exceptions in a catch. And passing that exception to a SetException method.
+Most of that can be ignored. The important thing to note is that it is swallowing exceptions in a catch. And passing that exception to a `SetException` method.
 
-So when AsyncErrorHandler does its weaving it searches for "SetException(exception);" and then modifies the catch to look like this.
+So when AsyncErrorHandler does its weaving it searches for `SetException(exception);` and then modifies the catch to look like this.
 
     catch (Exception exception)
     {
