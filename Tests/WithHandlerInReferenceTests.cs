@@ -83,6 +83,6 @@ public class WithHandlerInReferenceTests
     [Test]
     public void PeVerify()
     {
-        Verifier.Verify(beforeAssemblyPath,beforeAssemblyPath);
+        Verifier.Verify(afterAssemblyPath);
     }
 }

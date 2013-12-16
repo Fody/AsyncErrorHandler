@@ -79,6 +79,6 @@ public class InSameAssemblyTests
     [Test]
     public void PeVerify()
     {
-        Verifier.Verify(beforeAssemblyPath, beforeAssemblyPath);
+        Verifier.Verify(afterAssemblyPath);
     }
 }

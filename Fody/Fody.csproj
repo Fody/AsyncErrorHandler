@@ -12,7 +12,7 @@
     <AssemblyName>AsyncErrorHandler.Fody</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <FodyPath>..\packages\Fody.1.14.0</FodyPath>
+    <FodyPath>..\packages\Fody.1.19.1.0</FodyPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -80,7 +80,6 @@
     <Content Include="NugetAssets\Fody_ToBeDeleted.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="Fody.targets" />
   <UsingTask TaskName="PepitaPackage.WeavingTask" AssemblyFile="$(SolutionDir)Tools\Pepita\PepitaPackage.dll" />
   <Target Name="AfterBuild">
     <ItemGroup>
@@ -95,4 +94,5 @@
     <Copy SourceFiles="$(ProjectDir)NugetAssets\uninstall.ps1" DestinationFolder="$(SolutionDir)NuGetBuild\Tools" />
     <PepitaPackage.WeavingTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" MetadataAssembly="$(OutputPath)AsyncErrorHandler.Fody.dll" />
   </Target>
+  <Import Project="Fody.targets" />
 </Project>
