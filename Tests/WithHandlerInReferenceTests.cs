@@ -16,7 +16,7 @@ public class WithHandlerInReferenceTests
     {
         beforeAssemblyPath = Path.GetFullPath(@"..\..\..\AssemblyWithHandlerInReference\bin\debug\AssemblyWithHandlerInReference.dll");
 #if (!DEBUG)
-        beforeAssemblyPath = this.beforeAssemblyPath.Replace("debug", "Release");
+        beforeAssemblyPath = beforeAssemblyPath.Replace("debug", "Release");
 #endif
         afterAssemblyPath = WeaverHelper.Weave(beforeAssemblyPath);
 
