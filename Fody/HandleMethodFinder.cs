@@ -44,7 +44,7 @@ public class HandleMethodFinder
 	{
 		foreach (var module in GetAllModulesToSearch())
 		{
-			var errorHandler = module.Types.FirstOrDefault(x => x.Name == "AsyncErrorHandler");
+			var errorHandler = module.GetTypes().FirstOrDefault(x => x.Name == "AsyncErrorHandler");
 			if (errorHandler != null)
 			{
 				return errorHandler;
