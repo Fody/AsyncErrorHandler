@@ -6,8 +6,7 @@ public static class StateMachineChecker
 
     public static bool IsStateMachine(this TypeDefinition typeDefinition)
     {
-        return typeDefinition.IsValueType &&
-            typeDefinition.IsIAsyncStateMachine() &&
+        return typeDefinition.IsIAsyncStateMachine() &&
             typeDefinition.IsCompilerGenerated();
     }
 
