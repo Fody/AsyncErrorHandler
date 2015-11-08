@@ -9,7 +9,6 @@ public class MethodProcessor
 
     public void Process(MethodDefinition method)
     {
-
         method.Body.SimplifyMacros();
 
         var instructions = method.Body.Instructions;
