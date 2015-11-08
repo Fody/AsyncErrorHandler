@@ -1,3 +1,4 @@
+using System;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using Mono.Cecil.Rocks;
@@ -30,7 +31,12 @@ public class MethodProcessor
                 var previous = instructions[index-1];
                 instructions.Insert(index, Instruction.Create(OpCodes.Call, HandleMethodFinder.HandleMethod));
                 index++;
-                instructions.Insert(index, Instruction.Create(previous.OpCode, (VariableDefinition)previous.Operand));
+                var variableDefinition = previous.Operand as VariableDefinition;
+                if (variableDefinition == null)
+                {
+                    throw new Exception($"Expected VariableDefinition but got '{previous.Operand.GetType().Name}'.");
+                }
+                instructions.Insert(index, Instruction.Create(previous.OpCode, variableDefinition));
                 index++;
             }
 

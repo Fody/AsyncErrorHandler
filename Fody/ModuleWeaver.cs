@@ -37,8 +37,15 @@ public class ModuleWeaver
 
         foreach (var stateMachine in stateMachineFinder.AllTypes)
         {
-            var moveNext = stateMachine.Methods.First(x => x.Name == "MoveNext");
-            methodProcessor.Process(moveNext);
+            try
+            {
+                var moveNext = stateMachine.Methods.First(x => x.Name == "MoveNext");
+                methodProcessor.Process(moveNext);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception($"Failed to process '{stateMachine.FullName}'.", exception);
+            }
         }
 
     }
