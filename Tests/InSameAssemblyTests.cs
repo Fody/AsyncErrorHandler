@@ -14,7 +14,7 @@ public class InSameAssemblyTests
 
     public InSameAssemblyTests()
     {
-        beforeAssemblyPath = Path.GetFullPath(@"..\..\..\AssemblyToProcess\bin\debug\AssemblyToProcess.dll");
+        beforeAssemblyPath = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\..\AssemblyToProcess\bin\debug\AssemblyToProcess.dll"));
 #if (!DEBUG)
         beforeAssemblyPath = beforeAssemblyPath.Replace("debug", "Release");
 #endif
@@ -79,6 +79,6 @@ public class InSameAssemblyTests
     [Test]
     public void PeVerify()
     {
-        Verifier.Verify(afterAssemblyPath);
+        Verifier.Verify(beforeAssemblyPath, afterAssemblyPath);
     }
 }

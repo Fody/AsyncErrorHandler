@@ -5,7 +5,7 @@ using System.Threading;
 using NUnit.Framework;
 
 [TestFixture]
-public class WithHandlerInReferenceTests 
+public class WithHandlerInReferenceTests
 {
     string beforeAssemblyPath;
     Assembly assembly;
@@ -14,7 +14,7 @@ public class WithHandlerInReferenceTests
 
     public WithHandlerInReferenceTests()
     {
-        beforeAssemblyPath = Path.GetFullPath(@"..\..\..\AssemblyWithHandlerInReference\bin\debug\AssemblyWithHandlerInReference.dll");
+        beforeAssemblyPath = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\..\AssemblyWithHandlerInReference\bin\debug\AssemblyWithHandlerInReference.dll"));
 #if (!DEBUG)
         beforeAssemblyPath = beforeAssemblyPath.Replace("debug", "Release");
 #endif
@@ -22,13 +22,13 @@ public class WithHandlerInReferenceTests
 
 
         assembly = Assembly.LoadFrom(afterAssemblyPath);
-         
-		var directoryName = Path.GetDirectoryName(assembly.Location);
-	    var combine = Path.Combine(directoryName, "AssemblyToProcess.dll");
-	    var refFile = Assembly.LoadFrom(combine);
+
+        var directoryName = Path.GetDirectoryName(assembly.Location);
+        var combine = Path.Combine(directoryName, "AssemblyToProcess.dll");
+        var refFile = Assembly.LoadFrom(combine);
         var errorHandler = refFile.GetType("AsyncErrorHandler");
         exceptionField = errorHandler.GetField("Exception");
-	}
+    }
 
     [Test]
     public void Method()
@@ -83,6 +83,6 @@ public class WithHandlerInReferenceTests
     [Test]
     public void PeVerify()
     {
-        Verifier.Verify(afterAssemblyPath);
+        Verifier.Verify(beforeAssemblyPath, afterAssemblyPath);
     }
 }
