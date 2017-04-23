@@ -17,6 +17,6 @@ public static class StateMachineChecker
 
     public static bool IsIAsyncStateMachine(this TypeDefinition typeDefinition)
     {
-        return typeDefinition.Interfaces.Any(x => x.Name =="IAsyncStateMachine");
+        return typeDefinition.Interfaces.Any(x => x.InterfaceType.Name =="IAsyncStateMachine");
     }
 }

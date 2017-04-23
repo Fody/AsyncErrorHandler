@@ -26,16 +26,17 @@ public static class WeaverHelper
                 SymbolStream = symbolStream,
                 SymbolReaderProvider = new PdbReaderProvider()
             };
-            var moduleDefinition = ModuleDefinition.ReadModule(newAssembly, readerParameters);
-
-            var weavingTask = new ModuleWeaver
+            using (var moduleDefinition = ModuleDefinition.ReadModule(assemblyPath, readerParameters))
             {
-                ModuleDefinition = moduleDefinition,
-                AssemblyResolver = assemblyResolver
-            };
+                var weavingTask = new ModuleWeaver
+                {
+                    ModuleDefinition = moduleDefinition,
+                    AssemblyResolver = assemblyResolver
+                };
 
-            weavingTask.Execute();
-            moduleDefinition.Write(newAssembly);
+                weavingTask.Execute();
+                moduleDefinition.Write(newAssembly);
+            }
 
             return newAssembly;
         }
