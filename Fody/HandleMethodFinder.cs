@@ -7,50 +7,50 @@ public class HandleMethodFinder
     public ModuleDefinition ModuleDefinition;
     public MethodReference HandleMethod;
 
-	public IAssemblyResolver AssemblyResolver;
+    public IAssemblyResolver AssemblyResolver;
 
 
-	public void Execute()
+    public void Execute()
     {
         var errorHandler = GetTypeDefinition();
-		var handleMethod = errorHandler.Methods.FirstOrDefault(x => x.Name == "HandleException");
-		if (handleMethod == null)
+        var handleMethod = errorHandler.Methods.FirstOrDefault(x => x.Name == "HandleException");
+        if (handleMethod == null)
         {
             throw new WeavingException($"Could not find 'HandleException' method on '{errorHandler.FullName}'.");
         }
-		if (!handleMethod.IsPublic)
+        if (!handleMethod.IsPublic)
         {
             throw new WeavingException("Method 'AsyncErrorHandler.HandleException' is not public.");
         }
-		if (!handleMethod.IsStatic)
+        if (!handleMethod.IsStatic)
         {
             throw new WeavingException("Method 'AsyncErrorHandler.HandleException' is not static.");
         }
-		if (handleMethod.Parameters.Count != 1)
+        if (handleMethod.Parameters.Count != 1)
         {
             throw new WeavingException("Method 'AsyncErrorHandler.HandleException' must have only 1 parameter that is of type 'System.Exception'.");
         }
-		var parameterDefinition = handleMethod.Parameters.First();
+        var parameterDefinition = handleMethod.Parameters.First();
         var parameterType = parameterDefinition.ParameterType;
         if (parameterType.FullName != "System.Exception")
         {
             throw new WeavingException("Method 'AsyncErrorHandler.HandleException' must have only 1 parameter that is of type 'System.Exception'.");
         }
-		HandleMethod = ModuleDefinition.Import(handleMethod);
+        HandleMethod = ModuleDefinition.Import(handleMethod);
 
     }
 
-	TypeDefinition GetTypeDefinition()
-	{
-		foreach (var module in GetAllModulesToSearch())
-		{
-			var errorHandler = module.GetTypes().FirstOrDefault(x => x.Name == "AsyncErrorHandler");
-			if (errorHandler != null)
-			{
-				return errorHandler;
-			}
-		}
-	    var error = 
+    TypeDefinition GetTypeDefinition()
+    {
+        foreach (var module in GetAllModulesToSearch())
+        {
+            var errorHandler = module.GetTypes().FirstOrDefault(x => x.Name == "AsyncErrorHandler");
+            if (errorHandler != null)
+            {
+                return errorHandler;
+            }
+        }
+        var error = 
 @"Could not find type 'AsyncErrorHandler'. Expected to find a class with the following signature.
 public static class AsyncErrorHandler
 {
@@ -61,21 +61,21 @@ public static class AsyncErrorHandler
 }
 ";
 
-	    throw new WeavingException(error);
-	}	
-	
-	IEnumerable<ModuleDefinition> GetAllModulesToSearch()
-	{
-		yield return ModuleDefinition;
+        throw new WeavingException(error);
+    }    
+    
+    IEnumerable<ModuleDefinition> GetAllModulesToSearch()
+    {
+        yield return ModuleDefinition;
 
-		foreach (var reference in ModuleDefinition.AssemblyReferences.Where(x => !IsMicrosoftAssembly(x)))
-		{
-			yield return AssemblyResolver.Resolve(reference).MainModule;
-		}
-	}
+        foreach (var reference in ModuleDefinition.AssemblyReferences.Where(x => !IsMicrosoftAssembly(x)))
+        {
+            yield return AssemblyResolver.Resolve(reference).MainModule;
+        }
+    }
 
-	static bool IsMicrosoftAssembly(AssemblyNameReference reference)
-	{
-		return reference.FullName.EndsWith("b77a5c561934e089");
-	}
+    static bool IsMicrosoftAssembly(AssemblyNameReference reference)
+    {
+        return reference.FullName.EndsWith("b77a5c561934e089");
+    }
 }
