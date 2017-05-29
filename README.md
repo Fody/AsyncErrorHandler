@@ -1,7 +1,12 @@
+[![Chat on Gitter](https://img.shields.io/gitter/room/fody/fody.svg?style=flat)](https://gitter.im/Fody)
+[![NuGet Status](http://img.shields.io/nuget/v/AsyncErrorHandler.Fody.svg?style=flat)](https://www.nuget.org/packages/AsyncErrorHandler.Fody/)
+
+
 Fody.AsyncErrorHandler
 ==================
 
 ![Icon](https://raw.github.com/Fody/AsyncErrorHandler/master/Icons/package_icon.png)
+
 
 ## What?
 
@@ -9,9 +14,8 @@ Fody.AsyncErrorHandler is a [Fody](https://github.com/Fody/Fody) extension for w
 
 [Introduction to Fody](https://github.com/Fody/Fody/wiki/SampleUsage)
 
-[![NuGet Status](https://img.shields.io/gitter/room/fody/fody.svg?style=flat)](https://gitter.im/Fody/Fody)
 
-## The nuget package  [![NuGet Status](http://img.shields.io/nuget/v/AsyncErrorHandler.Fody.svg?style=flat)](https://www.nuget.org/packages/AsyncErrorHandler.Fody/)
+## The nuget package
 
 https://nuget.org/packages/AsyncErrorHandler.Fody/
 
@@ -181,4 +185,3 @@ So when AsyncErrorHandler does its weaving it searches for `SetException(excepti
 ## Icon
 
 Icon courtesy of [The Noun Project](http://thenounproject.com)
-
