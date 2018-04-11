@@ -49,17 +49,20 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <None Include="packages.config" />
+    <Reference Include="FodyHelpers">
+      <HintPath>..\packages\FodyHelpers.3.0.3\lib\net46\FodyHelpers.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Cecil">
-      <HintPath>..\packages\FodyCecil.3.0.2\lib\net46\Mono.Cecil.dll</HintPath>
+      <HintPath>..\packages\FodyHelpers.3.0.3\lib\net46\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Mdb">
-      <HintPath>..\packages\FodyCecil.3.0.2\lib\net46\Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>..\packages\FodyHelpers.3.0.3\lib\net46\Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Pdb">
-      <HintPath>..\packages\FodyCecil.3.0.2\lib\net46\Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>..\packages\FodyHelpers.3.0.3\lib\net46\Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Rocks">
-      <HintPath>..\packages\FodyCecil.3.0.2\lib\net46\Mono.Cecil.Rocks.dll</HintPath>
+      <HintPath>..\packages\FodyHelpers.3.0.3\lib\net46\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

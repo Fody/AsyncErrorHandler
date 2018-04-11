@@ -1,12 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Fody;
 using Mono.Cecil;
 
-public class ModuleWeaver
+public class ModuleWeaver : BaseModuleWeaver
 {
-    public Action<string> LogInfo { get; set; }
-    public Action<string> LogWarning { get; set; }
-    public ModuleDefinition ModuleDefinition { get; set; }
     public IAssemblyResolver AssemblyResolver { get; set; }
 
     public ModuleWeaver()
@@ -15,7 +14,7 @@ public class ModuleWeaver
         LogWarning = s => { };
     }
 
-    public void Execute()
+    public override void Execute()
     {
         var initializeMethodFinder = new HandleMethodFinder
             {
@@ -48,5 +47,10 @@ public class ModuleWeaver
             }
         }
 
+    }
+
+    public override IEnumerable<string> GetAssembliesForScanning()
+    {
+        throw new NotImplementedException();
     }
 }
