@@ -16,7 +16,7 @@
     <language>en-AU</language>
     <tags>Async, Exception Handling, ILWeaving, Fody, Cecil</tags>
     <dependencies>
-      <dependency id="Fody" version="2.0.0"/>
+      <dependency id="Fody" version="3.0.0"/>
     </dependencies>
   </metadata>
 </package>
