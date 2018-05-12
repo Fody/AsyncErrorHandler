@@ -13,7 +13,9 @@ public class InSameAssemblyTests
     {
         var weavingTask = new ModuleWeaver();
 
-        var testResult = weavingTask.ExecuteTestRun("AssemblyToProcess.dll",assemblyName: "InSameAssembly");
+        var testResult = weavingTask.ExecuteTestRun("AssemblyToProcess.dll",
+            assemblyName: "InSameAssembly",
+            runPeVerify: false);
         target = testResult.GetInstance("Target");
         var errorHandler = testResult.Assembly.GetType("AsyncErrorHandler");
         exceptionField = errorHandler.GetField("Exception");
