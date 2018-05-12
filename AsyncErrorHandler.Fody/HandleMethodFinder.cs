@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using Fody;
 using Mono.Cecil;
 
 public class HandleMethodFinder
 {
     public ModuleDefinition ModuleDefinition;
     public MethodReference HandleMethod;
-
     public IAssemblyResolver AssemblyResolver;
-
 
     public void Execute()
     {
@@ -36,8 +35,7 @@ public class HandleMethodFinder
         {
             throw new WeavingException("Method 'AsyncErrorHandler.HandleException' must have only 1 parameter that is of type 'System.Exception'.");
         }
-        HandleMethod = ModuleDefinition.Import(handleMethod);
-
+        HandleMethod = ModuleDefinition.ImportReference(handleMethod);
     }
 
     TypeDefinition GetTypeDefinition()
@@ -50,7 +48,7 @@ public class HandleMethodFinder
                 return errorHandler;
             }
         }
-        var error = 
+        var error =
 @"Could not find type 'AsyncErrorHandler'. Expected to find a class with the following signature.
 public static class AsyncErrorHandler
 {
@@ -62,15 +60,15 @@ public static class AsyncErrorHandler
 ";
 
         throw new WeavingException(error);
-    }    
-    
+    }
+
     IEnumerable<ModuleDefinition> GetAllModulesToSearch()
     {
         yield return ModuleDefinition;
 
         foreach (var reference in ModuleDefinition.AssemblyReferences.Where(x => !IsMicrosoftAssembly(x)))
         {
-            yield return AssemblyResolver.Resolve(reference).MainModule;
+            yield return ModuleDefinition.AssemblyResolver.Resolve(reference).MainModule;
         }
     }
 

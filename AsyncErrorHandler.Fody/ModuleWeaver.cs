@@ -8,31 +8,25 @@ public class ModuleWeaver : BaseModuleWeaver
 {
     public IAssemblyResolver AssemblyResolver { get; set; }
 
-    public ModuleWeaver()
-    {
-        LogInfo = s => { };
-        LogWarning = s => { };
-    }
-
     public override void Execute()
     {
         var initializeMethodFinder = new HandleMethodFinder
-            {
-                ModuleDefinition = ModuleDefinition,
-                AssemblyResolver = AssemblyResolver
-            };
+        {
+            ModuleDefinition = ModuleDefinition,
+            AssemblyResolver = AssemblyResolver
+        };
         initializeMethodFinder.Execute();
 
         var stateMachineFinder = new StateMachineTypesFinder
-            {
-                ModuleDefinition = ModuleDefinition,
-            };
+        {
+            ModuleDefinition = ModuleDefinition,
+        };
         stateMachineFinder.Execute();
 
         var methodProcessor = new MethodProcessor
-            {
-                HandleMethodFinder = initializeMethodFinder,
-            };
+        {
+            HandleMethodFinder = initializeMethodFinder,
+        };
 
         foreach (var stateMachine in stateMachineFinder.AllTypes)
         {
@@ -46,11 +40,10 @@ public class ModuleWeaver : BaseModuleWeaver
                 throw new Exception($"Failed to process '{stateMachine.FullName}'.", exception);
             }
         }
-
     }
 
     public override IEnumerable<string> GetAssembliesForScanning()
     {
-        throw new NotImplementedException();
+        yield break;
     }
 }

@@ -1,73 +1,58 @@
 ﻿using System;
-using System.IO;
 using System.Reflection;
 using System.Threading;
-using NUnit.Framework;
+using Fody;
+using Xunit;
 
-[TestFixture]
 public class WithHandlerInReferenceTests
 {
-    string beforeAssemblyPath;
-    Assembly assembly;
     FieldInfo exceptionField;
-    string afterAssemblyPath;
+    dynamic target;
 
     public WithHandlerInReferenceTests()
     {
-        beforeAssemblyPath = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\..\AssemblyWithHandlerInReference\bin\debug\AssemblyWithHandlerInReference.dll"));
-#if (!DEBUG)
-        beforeAssemblyPath = beforeAssemblyPath.Replace("debug", "Release");
-#endif
-        afterAssemblyPath = WeaverHelper.Weave(beforeAssemblyPath);
+        var weavingTask = new ModuleWeaver();
 
-
-        assembly = Assembly.LoadFrom(afterAssemblyPath);
-
-        var directoryName = Path.GetDirectoryName(assembly.Location);
-        var combine = Path.Combine(directoryName, "AssemblyToProcess.dll");
-        var refFile = Assembly.LoadFrom(combine);
-        var errorHandler = refFile.GetType("AsyncErrorHandler");
+        var testResult = weavingTask.ExecuteTestRun("AssemblyWithHandlerInReference.dll");
+        target = testResult.GetInstance("Target");
+        var errorHandler = Type.GetType("AsyncErrorHandler, AssemblyToProcess");
         exceptionField = errorHandler.GetField("Exception");
     }
 
-    [Test]
+    [Fact]
     public void Method()
     {
         ClearException();
-        var instance = assembly.GetInstance("Target");
-        instance.Method();
+        target.Method();
         Thread.Sleep(100);
-        Assert.IsNull(GetException());
+        Assert.Null(GetException());
     }
 
-    [Test]
+    [Fact]
     public void MethodWithThrow()
     {
         ClearException();
-        var instance = assembly.GetInstance("Target");
-        instance.MethodWithThrow();
+        target.MethodWithThrow();
         Thread.Sleep(100);
-        Assert.IsNotNull(GetException());
+        Assert.NotNull(GetException());
     }
 
-    [Test]
+    [Fact]
     public void MethodGeneric()
     {
         ClearException();
-        var instance = assembly.GetInstance("Target");
-        instance.MethodGeneric();
+        target.MethodGeneric();
         Thread.Sleep(100);
-        Assert.IsNull(GetException());
+        Assert.Null(GetException());
     }
 
-    [Test]
+    [Fact]
     public void MethodWithThrowGeneric()
     {
         ClearException();
-        var instance = assembly.GetInstance("Target");
-        instance.MethodWithThrowGeneric();
+        target.MethodWithThrowGeneric();
         Thread.Sleep(100);
-        Assert.IsNotNull(GetException());
+        Assert.NotNull(GetException());
     }
 
     void ClearException()
@@ -78,11 +63,5 @@ public class WithHandlerInReferenceTests
     Exception GetException()
     {
         return (Exception) exceptionField.GetValue(null);
-    }
-
-    [Test]
-    public void PeVerify()
-    {
-        Verifier.Verify(beforeAssemblyPath, afterAssemblyPath);
     }
 }

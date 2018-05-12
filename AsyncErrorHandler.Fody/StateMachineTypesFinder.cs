@@ -3,7 +3,6 @@ using Mono.Cecil;
 
 public class StateMachineTypesFinder
 {
-
     public List<TypeDefinition> AllTypes;
     public ModuleDefinition ModuleDefinition;
 

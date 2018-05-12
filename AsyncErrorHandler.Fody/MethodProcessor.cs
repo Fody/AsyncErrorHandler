@@ -7,7 +7,6 @@ public class MethodProcessor
 {
     public HandleMethodFinder HandleMethodFinder;
 
-
     public void Process(MethodDefinition method)
     {
         method.Body.SimplifyMacros();
@@ -20,8 +19,8 @@ public class MethodProcessor
             {
                 continue;
             }
-            var methodReference = line.Operand as MethodReference;
-            if (methodReference == null)
+
+            if (!(line.Operand is MethodReference methodReference))
             {
                 continue;
             }
@@ -31,8 +30,7 @@ public class MethodProcessor
                 var previous = instructions[index-1];
                 instructions.Insert(index, Instruction.Create(OpCodes.Call, HandleMethodFinder.HandleMethod));
                 index++;
-                var variableDefinition = previous.Operand as VariableDefinition;
-                if (variableDefinition == null)
+                if (!(previous.Operand is VariableDefinition variableDefinition))
                 {
                     throw new Exception($"Expected VariableDefinition but got '{previous.Operand.GetType().Name}'.");
                 }
@@ -46,8 +44,8 @@ public class MethodProcessor
 
     public static bool IsSetExceptionMethod(MethodReference methodReference)
     {
-        return 
-            methodReference.Name == "SetException" && 
+        return
+            methodReference.Name == "SetException" &&
             methodReference.DeclaringType.FullName.StartsWith("System.Runtime.CompilerServices.AsyncTaskMethodBuilder");
     }
 }

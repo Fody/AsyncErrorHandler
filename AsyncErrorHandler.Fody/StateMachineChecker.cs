@@ -3,7 +3,6 @@ using Mono.Cecil;
 
 public static class StateMachineChecker
 {
-
     public static bool IsStateMachine(this TypeDefinition typeDefinition)
     {
         return typeDefinition.IsIAsyncStateMachine() &&
