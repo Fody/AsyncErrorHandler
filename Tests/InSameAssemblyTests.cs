@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using System.Threading;
+using System.Threading.Tasks;
 using Fody;
 using Xunit;
 
@@ -22,38 +22,48 @@ public class InSameAssemblyTests
     }
 
     [Fact]
-    public void Method()
+    public async Task Method()
     {
         ClearException();
-        target.Method();
-        Thread.Sleep(100);
+        await target.Method();
         Assert.Null(GetException());
     }
 
     [Fact]
-    public void MethodWithThrow()
+    public async Task MethodWithThrow()
     {
         ClearException();
-        target.MethodWithThrow();
-        Thread.Sleep(100);
+        try
+        {
+            await target.MethodWithThrow();
+        }
+        catch
+        {
+        }
+
         Assert.NotNull(GetException());
     }
 
     [Fact]
-    public void MethodGeneric()
+    public async Task MethodGeneric()
     {
         ClearException();
-        target.MethodGeneric();
-        Thread.Sleep(100);
+        await target.MethodGeneric();
         Assert.Null(GetException());
     }
 
     [Fact]
-    public void MethodWithThrowGeneric()
+    public async Task MethodWithThrowGeneric()
     {
         ClearException();
-        target.MethodWithThrowGeneric();
-        Thread.Sleep(100);
+        try
+        {
+            await target.MethodWithThrowGeneric();
+        }
+        catch
+        {
+        }
+
         Assert.NotNull(GetException());
     }
 
