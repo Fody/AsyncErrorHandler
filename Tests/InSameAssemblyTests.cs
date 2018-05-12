@@ -13,7 +13,7 @@ public class InSameAssemblyTests
     {
         var weavingTask = new ModuleWeaver();
 
-        var testResult = weavingTask.ExecuteTestRun("AssemblyToProcess.dll");
+        var testResult = weavingTask.ExecuteTestRun("AssemblyToProcess.dll",assemblyName: "InSameAssembly");
         target = testResult.GetInstance("Target");
         var errorHandler = testResult.Assembly.GetType("AsyncErrorHandler");
         exceptionField = errorHandler.GetField("Exception");
