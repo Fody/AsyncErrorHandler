@@ -19,12 +19,12 @@ See also [Fody usage](https://github.com/Fody/Fody#usage).
 
 https://nuget.org/packages/AsyncErrorHandler.Fody/
 
-```
+```powershell
+PM> Install-Package Fody
 PM> Install-Package AsyncErrorHandler.Fody
-PM> Update-Package Fody
 ```
 
-The `Update-Package Fody` is required since NuGet always defaults to the oldest, and most buggy, version of any dependency.### Add to FodyWeavers.xml
+The `Install-Package Fody` is required since NuGet always defaults to the oldest, and most buggy, version of any dependency.### Add to FodyWeavers.xml
 
 
 ### Add to FodyWeavers.xml
