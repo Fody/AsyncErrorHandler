@@ -10,9 +10,9 @@ Fody.AsyncErrorHandler
 
 ## What?
 
-Fody.AsyncErrorHandler is a [Fody](https://github.com/Fody/Fody) extension for weaving exception handling code into applications which use async code.
+Fody.AsyncErrorHandler is a [Fody](https://github.com/Fody/Home/)extension for weaving exception handling code into applications which use async code.
 
-See also [Fody usage](https://github.com/Fody/Fody#usage).
+See also [Fody usage](https://github.com/Fody/Home/blob/master/pages/usage.md).
 
 
 ## The nuget package
@@ -29,7 +29,7 @@ The `Install-Package Fody` is required since NuGet always defaults to the oldest
 
 ### Add to FodyWeavers.xml
 
-Add `<AsyncErrorHandler/>` to [FodyWeavers.xml](https://github.com/Fody/Fody#add-fodyweaversxml)
+Add `<AsyncErrorHandler/>` to [FodyWeavers.xml](https://github.com/Fody/Home/blob/master/pages/usage.md#add-fodyweaversxml)
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
