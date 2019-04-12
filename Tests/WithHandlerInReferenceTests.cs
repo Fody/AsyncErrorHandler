@@ -3,13 +3,16 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Fody;
 using Xunit;
+using Xunit.Abstractions;
 
-public class WithHandlerInReferenceTests
+public class WithHandlerInReferenceTests :
+    XunitLoggingBase
 {
     FieldInfo exceptionField;
     dynamic target;
 
-    public WithHandlerInReferenceTests()
+    public WithHandlerInReferenceTests(ITestOutputHelper output) : 
+        base(output)
     {
         var weavingTask = new ModuleWeaver();
 

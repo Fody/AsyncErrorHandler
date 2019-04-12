@@ -3,13 +3,16 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Fody;
 using Xunit;
+using Xunit.Abstractions;
 
-public class InSameAssemblyTests
+public class InSameAssemblyTests :
+    XunitLoggingBase
 {
     FieldInfo exceptionField;
     dynamic target;
 
-    public InSameAssemblyTests()
+    public InSameAssemblyTests(ITestOutputHelper output) : 
+        base(output)
     {
         var weavingTask = new ModuleWeaver();
 
