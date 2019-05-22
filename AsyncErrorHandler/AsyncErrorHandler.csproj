@@ -9,7 +9,7 @@
     <PackageTags>Async, Exception Handling, ILWeaving, Fody, Cecil</PackageTags>
     <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
     <PackageIconUrl>https://raw.githubusercontent.com/Fody/AsyncErrorHandler/master/package_icon.png</PackageIconUrl>
-    <PackageProjectUrl>http://github.com/Fody/AsyncErrorHandler</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Fody/AsyncErrorHandler</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup>
