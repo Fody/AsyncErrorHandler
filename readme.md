@@ -15,7 +15,7 @@ Fody.AsyncErrorHandler is a [Fody](https://github.com/Fody/Home/)extension for w
 See also [Fody usage](https://github.com/Fody/Home/blob/master/pages/usage.md).
 
 
-## The nuget package
+## NuGet package
 
 https://nuget.org/packages/AsyncErrorHandler.Fody/
 
@@ -218,4 +218,4 @@ catch (Exception exception)
 
 ## Icon
 
-Icon courtesy of [The Noun Project](http://thenounproject.com)
+Icon courtesy of [The Noun Project](https://thenounproject.com)
