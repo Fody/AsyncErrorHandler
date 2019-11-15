@@ -1,123 +1,221 @@
-# <img src="https://github.com/Fody/Home/raw/master/images/fody.png" height="40px"> Fody
-
-The Home repository is the starting point for people to learn about Fody, the project.
-
-Fody is an extensible tool for weaving .net assemblies. It enables the manipulating the IL of an assembly as part of a build requires a significant amount of plumbing code. This plumbing code involves knowledge of both the MSBuild and Visual Studio APIs. Fody attempts to eliminate that plumbing code through an extensible add-in model. This technique is very powerful, for example you can turn simple properties into full [INotifyPropertyChanged implementations](https://github.com/Fody/PropertyChanged), add [checks for null arguments](https://github.com/Fody/NullGuard), add [Method Timings](https://github.com/Fody/MethodTimer), even [make all your string comparisons case insensitive](https://github.com/Fody/Caseless).
+[![Chat on Gitter](https://img.shields.io/gitter/room/fody/fody.svg)](https://gitter.im/Fody/Fody)
+[![NuGet Status](https://img.shields.io/nuget/v/AsyncErrorHandler.Fody.svg)](https://www.nuget.org/packages/AsyncErrorHandler.Fody/)
 
 
-<!--- StartOpenCollectiveBackers -->
+Fody.AsyncErrorHandler
+==================
 
-[Already a Patron? skip past this section](#endofbacking)
-
-
-## Community backed
-
-Fody requires significant effort to maintain. As such it relies on financial contributions from the community and sponsorship to ensure its long term viability. **It is expected that all developers using Fody [become a Patron on OpenCollective](https://opencollective.com/fody/order/3059).**
-
-[Go to licensing FAQ](https://github.com/Fody/Home/blob/master/pages/licensing-patron-faq.md) for more information.
+![Icon](https://raw.github.com/Fody/AsyncErrorHandler/master/package_icon.png)
 
 
-### Gold Sponsors
+## What?
 
-Support this project by [becoming a Gold Sponsor](https://opencollective.com/fody/order/7088). A large company logo will be added here with a link to your website.
+Fody.AsyncErrorHandler is a [Fody](https://github.com/Fody/Home/)extension for weaving exception handling code into applications which use async code.
 
-<a href="https://www.postsharp.net?utm_source=fody&utm_medium=referral"><img alt="PostSharp" src="https://raw.githubusercontent.com/Fody/Home/master/images/postsharp.png"></a>
-
-
-### Silver Sponsors
-
-Support this project by [becoming a Silver Sponsor](https://opencollective.com/fody/order/7086). A medium company logo will be added here with a link to your website.
-
-<a href="https://particular.net/"><img alt="Particular Software" width="200px" src="https://raw.githubusercontent.com/Fody/Home/master/images/particular.svg?sanitize=true"></a>
+See also [Fody usage](https://github.com/Fody/Home/blob/master/pages/usage.md).
 
 
-### Bronze Sponsors
+## NuGet package
 
-Support this project by [becoming a Bronze Sponsor](https://opencollective.com/fody/order/7085). The company avatar will show up here with a link to your OpenCollective Profile.
+https://nuget.org/packages/AsyncErrorHandler.Fody/
 
-<a href="https://opencollective.com/fody/tiers/bronze/0/website"><img src="https://opencollective.com/fody/tiers/bronze/0/avatar.svg?avatarHeight=100"></a>
+```powershell
+PM> Install-Package Fody
+PM> Install-Package AsyncErrorHandler.Fody
+```
 
-
-### Patrons and sponsors
-
-Thanks to all the backers and sponsors! Support this project by [becoming a patron](https://opencollective.com/fody/order/3059).
-
-<a href="https://opencollective.com/fody#contributors"><img src="https://opencollective.com/fody/sponsor.svg?width=890&avatarHeight=50&button=false"><img src="https://opencollective.com/fody/backer.svg?width=890&avatarHeight=50&button=false"></a>
+The `Install-Package Fody` is required since NuGet always defaults to the oldest, and most buggy, version of any dependency.### Add to FodyWeavers.xml
 
 
-<!--- EndOpenCollectiveBackers -->
+### Add to FodyWeavers.xml
 
-<a href="#" id="endofbacking"></a>
+Add `<AsyncErrorHandler/>` to [FodyWeavers.xml](https://github.com/Fody/Home/blob/master/pages/usage.md#add-fodyweaversxml)
 
-## Main Fody code repository
-
-The codebase of core Fody engine located at https://github.com/Fody/Fody.
-
-[![Chat on Gitter](https://img.shields.io/gitter/room/fody/fody.svg?style=flat&max-age=86400)](https://gitter.im/Fody/Fody)
-
-## The plumbing tasks Fody handles
-
-  * Injection of the MSBuild task into the build pipeline
-  * Resolving the location of the assembly and pdb
-  * Abstracts the complexities of logging to MSBuild
-  * Reads the assembly and pdb into the Mono.Cecil object model
-  * Re-applying the strong name if necessary
-  * Saving the assembly and pdb
-
-Fody Uses [Mono.Cecil](http://www.mono-project.com/Cecil/) and an add-in based approach to modifying the IL of .net assemblies at compile time.
-
- * No install required to build.
- * Attributes are optional depending on the weavers used.
- * No runtime dependencies need to be deployed.
+```xml
+<Weavers>
+  <AsyncErrorHandler/>
+</Weavers>
+```
 
 
-## Documentation and Further Learning
+## Why?
 
-  * [Licensing and patron FAQ](https://github.com/Fody/Home/tree/master/pages/licensing-patron-faq.md)<br>
-    **It is expected that all developers using Fody [become a Patron on OpenCollective](https://opencollective.com/fody/order/3059).** See [Licensing/Patron FAQ](https://github.com/Fody/Home/tree/master/pages/licensing-patron-faq.md) for more information.
-  * [Usage](https://github.com/Fody/Home/tree/master/pages/usage.md)<br>
-    Introduction to using Fody.
-  * [Configuration](https://github.com/Fody/Home/tree/master/pages/configuration.md)<br>
-    All configuration options for Fody.
-  * [Addin discovery](https://github.com/Fody/Home/tree/master/pages/addin-discovery.md)<br>
-    How addins are resolved.
-  * [List of Fody weavers/addins](https://github.com/Fody/Home/tree/master/pages/addins.md)<br>
-  * [Changelog](https://github.com/Fody/Fody/milestones?state=closed)
-  * [FodyAddinSamples](https://github.com/Fody/FodyAddinSamples)<br>
-    A GitHub repo that contains a working sample of every Fody addin.
-  * [Common errors](https://github.com/Fody/Home/tree/master/pages/common-errors.md)
-  * [In solution weaving](https://github.com/Fody/Home/tree/master/pages/in-solution-weaving.md)<br>
-    Writing an addin that manipulates IL within the same solution.
-  * [ProcessedByFody class](https://github.com/Fody/Home/tree/master/pages/processedbyfody-class.md)<br>
-    Marker class added to target assemblies for diagnostic purposes.
-  * [Strong naming](https://github.com/Fody/Home/tree/master/pages/strong-naming.md)
-  * [Supported runtimes and IDE](https://github.com/Fody/Home/tree/master/pages/supported-runtimes-and-ide.md)
-  * [Addin development](https://github.com/Fody/Home/tree/master/pages/addin-development.md)<br>
-    Building a new Fody addin.
-  * [Addin packaging](https://github.com/Fody/Home/tree/master/pages/addin-packaging.md)<br>
-    Packaging and deployment of Fody weavers.
-  * [BasicFodyAddin](/BasicFodyAddin)<br>
-    A simple project meant to illustrate how to build an addin.
-  * [Fody Project Configuration Manager](https://github.com/tom-englert/ProjectConfigurationManager/wiki/6.-Fody)<br>
-    Provides an interactive tool that can support configuring weavers, which is especially helpful in solutions with many projects.
-  * [Backers tracking/info](https://github.com/Fody/Home/tree/master/pages/backers.md)
-  * [Donations](https://github.com/Fody/Home/tree/master/pages/donations.md)<br>
-    Every month the Fody project will donate a portion of funding raised to a charity or other cause.
+Because writing plumbing code is dumb and repetitive.
 
 
-## Naming
+## How?
 
-The name "Fody" comes from the small birds that belong to the weaver family [Ploceidae](http://en.wikipedia.org/wiki/Fody).
+IL-weaving after the code is compiled, bro.
+
+For example, imagine you've got this code to serialize an object to the filesystem:
+
+```csharp
+public class DataStorage
+{
+    public async Task WriteFile(string key, object value)
+    {
+        var jsonValue = JsonConvert.SerializeObject(value);
+        using (var file = await folder.OpenStreamForWriteAsync(key, CreationCollisionOption.ReplaceExisting))
+        using (var stream = new StreamWriter(file))
+            await stream.WriteAsync(jsonValue);
+    }
+}
+```
+
+After the code builds, the weaver could scan your assembly looking for code which behaves a certain way, and rewrite it to include the necessary handling code:
+
+```csharp
+public class DataStorage
+{
+    public async Task WriteFile(string key, object value)
+    {
+        try 
+        {
+            var jsonValue = JsonConvert.SerializeObject(value);
+            using (var file = await folder.OpenStreamForWriteAsync(key, CreationCollisionOption.ReplaceExisting))
+            using (var stream = new StreamWriter(file))
+                await stream.WriteAsync(jsonValue);
+        }
+        catch (Exception exception)
+        {
+            AsyncErrorHandler.HandleException(exception);
+        } 
+    }
+}
+```
+
+And your application could provide its own implementation of the error handling module:
 
 
-## Credits
+```csharp
+public static class AsyncErrorHandler
+{
+    public static void HandleException(Exception exception)
+    {
+        Debug.WriteLine(exception);
+    }
+}
+```
 
-Thanks to the following
+Which allows you to intercept the exceptions at runtime.
 
- * [Jb Evain](https://github.com/jbevain) for the use of [Mono Cecil](https://github.com/jbevain/cecil)
- * [GitHub](https://github.com/) for project hosting
- * [JetBrains](https://www.jetbrains.com/resharper/) for the generous donation of [ReSharper](https://www.jetbrains.com/resharper/) licenses.
- * [xUnit](https://xunit.github.io/)
- * [AppVeyor](https://www.appveyor.com/) and [Travis CI](https://travis-ci.org/) for build and CI infrastructure
- * [NuGet](https://www.nuget.org/) for package delivery
- * [The Noun Project](https://thenounproject.com) for the <a href="https://thenounproject.com/noun/bird/#icon-No6726">Bird</a> icon designed by <a href="https://thenounproject.com/MARCOHS">Marco Hernandez</a>
+
+## What it really does
+
+So the above example is actually a little misleading. It shows "in effect" what is inject. In reality the injected code is a little more complicated.
+
+
+### What async actually produces
+
+So given a method like this
+
+```csharp
+public async Task Method()
+{
+    await Task.Delay(1);
+}
+```
+
+The compile will produce this 
+
+```csharp
+[AsyncStateMachine(typeof(<Method>d__0)), DebuggerStepThrough]
+public Task Method()
+{
+    <Method>d__0 d__;
+    d__.<>4__this = this;
+    d__.<>t__builder = AsyncTaskMethodBuilder.Create();
+    d__.<>1__state = -1;
+    d__.<>t__builder.Start<<Method>d__0>(ref d__);
+    return d__.<>t__builder.Task;
+}
+```
+
+So "Method" has become a stub that calls into a state machine.
+
+The state machine will look like this
+
+```csharp
+[CompilerGenerated]
+struct <Method>d__0 : IAsyncStateMachine
+{
+    // Fields
+    public int <>1__state;
+    public Target <>4__this;
+    public AsyncTaskMethodBuilder <>t__builder;
+    private object <>t__stack;
+    private TaskAwaiter <>u__$awaiter1;
+
+    // Methods
+    private void MoveNext();
+    [DebuggerHidden]
+    private void SetStateMachine(IAsyncStateMachine param0);
+}
+```
+
+The method we care about is `MoveNext`. It will look something like this
+
+```csharp
+void MoveNext()
+{
+    try
+    {
+        TaskAwaiter awaiter;
+        bool flag = true;
+        switch (this.<>1__state)
+        {
+            case -3:
+                goto Label_009F;
+
+            case 0:
+                break;
+
+            default:
+                awaiter = Task.Delay(1).GetAwaiter();
+                if (awaiter.IsCompleted)
+                {
+                    goto Label_006F;
+                }
+                this.<>1__state = 0;
+                this.<>u__$awaiter1 = awaiter;
+                this.<>t__builder.AwaitUnsafeOnCompleted<TaskAwaiter, Target.<Method>d__0>(ref awaiter, ref this);
+                flag = false;
+                return;
+        }
+        awaiter = this.<>u__$awaiter1;
+        this.<>u__$awaiter1 = new TaskAwaiter();
+        this.<>1__state = -1;
+    Label_006F:
+        awaiter.GetResult();
+        awaiter = new TaskAwaiter();
+    }
+    catch (Exception exception)
+    {
+        this.<>1__state = -2;
+        this.<>t__builder.SetException(exception);
+        return;
+    }
+Label_009F:
+    this.<>1__state = -2;
+    this.<>t__builder.SetResult();
+}
+```
+
+Most of that can be ignored. The important thing to note is that it is swallowing exceptions in a catch. And passing that exception to a `SetException` method.
+
+So when AsyncErrorHandler does its weaving it searches for `SetException(exception);` and then modifies the catch to look like this.
+
+```csharp
+catch (Exception exception)
+{
+    this.<>1__state = -2;
+    AsyncErrorHandler.HandleException(exception);
+    this.<>t__builder.SetException(exception);
+    return;
+}
+```
+
+
+## Icon
+
+Icon courtesy of [The Noun Project](https://thenounproject.com)
