@@ -13,7 +13,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="FodyPackaging" Version="6.0.7" PrivateAssets="All" />
+    <PackageReference Include="FodyPackaging" Version="6.0.8" PrivateAssets="All" />
     <PackageReference Include="Fody" Version="6.0.7" PrivateAssets="none" />
   </ItemGroup>
 </Project>
