@@ -2,18 +2,14 @@
 using System.Reflection;
 using System.Threading.Tasks;
 using Fody;
-using VerifyXunit;
 using Xunit;
-using Xunit.Abstractions;
 
-public class WithHandlerInReferenceTests :
-    VerifyBase
+public class WithHandlerInReferenceTests
 {
     FieldInfo exceptionField;
     dynamic target;
 
-    public WithHandlerInReferenceTests(ITestOutputHelper output) :
-        base(output)
+    public WithHandlerInReferenceTests()
     {
         var weavingTask = new ModuleWeaver();
 
