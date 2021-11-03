@@ -6,8 +6,6 @@ using Mono.Cecil;
 
 public class ModuleWeaver : BaseModuleWeaver
 {
-    public IAssemblyResolver AssemblyResolver { get; set; }
-
     public override void Execute()
     {
         var initializeMethodFinder = new HandleMethodFinder
