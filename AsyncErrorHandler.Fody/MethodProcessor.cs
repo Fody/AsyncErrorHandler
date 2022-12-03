@@ -20,7 +20,7 @@ public class MethodProcessor
                 continue;
             }
 
-            if (!(line.Operand is MethodReference methodReference))
+            if (line.Operand is not MethodReference methodReference)
             {
                 continue;
             }
@@ -30,7 +30,7 @@ public class MethodProcessor
                 var previous = instructions[index-1];
                 instructions.Insert(index, Instruction.Create(OpCodes.Call, HandleMethodFinder.HandleMethod));
                 index++;
-                if (!(previous.Operand is VariableDefinition variableDefinition))
+                if (previous.Operand is not VariableDefinition variableDefinition)
                 {
                     throw new Exception($"Expected VariableDefinition but got '{previous.Operand.GetType().Name}'.");
                 }

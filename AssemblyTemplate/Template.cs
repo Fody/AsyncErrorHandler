@@ -25,5 +25,4 @@ public class Template
         await Task.Delay(1);
         throw new Exception();
     }
-  
 }
