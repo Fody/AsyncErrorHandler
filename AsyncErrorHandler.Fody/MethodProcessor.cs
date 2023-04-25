@@ -1,4 +1,3 @@
-using System;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using Mono.Cecil.Rocks;
@@ -25,18 +24,20 @@ public class MethodProcessor
                 continue;
             }
 
-            if (IsSetExceptionMethod(methodReference))
+            if (!IsSetExceptionMethod(methodReference))
             {
-                var previous = instructions[index-1];
-                instructions.Insert(index, Instruction.Create(OpCodes.Call, HandleMethodFinder.HandleMethod));
-                index++;
-                if (previous.Operand is not VariableDefinition variableDefinition)
-                {
-                    throw new Exception($"Expected VariableDefinition but got '{previous.Operand.GetType().Name}'.");
-                }
-                instructions.Insert(index, Instruction.Create(previous.OpCode, variableDefinition));
-                index++;
+                continue;
             }
+
+            var previous = instructions[index-1];
+            instructions.Insert(index, Instruction.Create(OpCodes.Call, HandleMethodFinder.HandleMethod));
+            index++;
+            if (previous.Operand is not VariableDefinition variableDefinition)
+            {
+                throw new($"Expected VariableDefinition but got '{previous.Operand.GetType().Name}'.");
+            }
+            instructions.Insert(index, Instruction.Create(previous.OpCode, variableDefinition));
+            index++;
 
         }
         method.Body.OptimizeMacros();

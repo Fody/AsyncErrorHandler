@@ -8,7 +8,7 @@ public class StateMachineTypesFinder
 
     public void Execute()
     {
-        AllTypes = new List<TypeDefinition>();
+        AllTypes = new();
         GetTypes(ModuleDefinition.Types);
     }
 

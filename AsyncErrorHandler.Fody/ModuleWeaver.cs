@@ -34,7 +34,7 @@ public class ModuleWeaver : BaseModuleWeaver
             }
             catch (Exception exception)
             {
-                throw new Exception($"Failed to process '{stateMachine.FullName}'.", exception);
+                throw new($"Failed to process '{stateMachine.FullName}'.", exception);
             }
         }
     }

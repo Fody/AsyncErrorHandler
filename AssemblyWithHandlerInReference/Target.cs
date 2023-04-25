@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 public class Target
 {
@@ -10,7 +9,7 @@ public class Target
     public async Task MethodWithThrow()
     {
         await Task.Delay(1);
-        throw new Exception();
+        throw new();
     }
     public async Task<int> MethodGeneric()
     {
@@ -20,6 +19,6 @@ public class Target
     public async Task<int> MethodWithThrowGeneric()
     {
         await Task.Delay(1);
-        throw new Exception();
+        throw new();
     }
 }

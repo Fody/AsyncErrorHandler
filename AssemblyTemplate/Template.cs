@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 public class Template
 {
@@ -11,7 +10,7 @@ public class Template
     public async Task MethodWithThrow()
     {
         await Task.Delay(1);
-        throw new Exception();
+        throw new();
     }
 
     public async Task<int> MethodGeneric()
@@ -23,6 +22,6 @@ public class Template
     public async Task<int> MethodWithThrowGeneric()
     {
         await Task.Delay(1);
-        throw new Exception();
+        throw new();
     }
 }
