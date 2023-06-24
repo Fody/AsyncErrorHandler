@@ -12,7 +12,7 @@ public class HandleMethodFinder
     public void Execute()
     {
         var errorHandler = GetTypeDefinition();
-        var handleMethod = errorHandler.Methods.FirstOrDefault(x => x.Name == "HandleException");
+        var handleMethod = errorHandler.Methods.FirstOrDefault(_ => _.Name == "HandleException");
         if (handleMethod == null)
         {
             throw new WeavingException($"Could not find 'HandleException' method on '{errorHandler.FullName}'.");
@@ -42,7 +42,7 @@ public class HandleMethodFinder
     {
         foreach (var module in GetAllModulesToSearch())
         {
-            var errorHandler = module.GetTypes().FirstOrDefault(x => x.Name == "AsyncErrorHandler");
+            var errorHandler = module.GetTypes().FirstOrDefault(_ => _.Name == "AsyncErrorHandler");
             if (errorHandler != null)
             {
                 return errorHandler;

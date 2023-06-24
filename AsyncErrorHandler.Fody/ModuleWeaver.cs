@@ -29,7 +29,7 @@ public class ModuleWeaver : BaseModuleWeaver
         {
             try
             {
-                var moveNext = stateMachine.Methods.First(x => x.Name == "MoveNext");
+                var moveNext = stateMachine.Methods.First(_ => _.Name == "MoveNext");
                 methodProcessor.Process(moveNext);
             }
             catch (Exception exception)
