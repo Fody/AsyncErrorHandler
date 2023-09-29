@@ -49,15 +49,16 @@ public class HandleMethodFinder
             }
         }
         var error =
-@"Could not find type 'AsyncErrorHandler'. Expected to find a class with the following signature.
-public static class AsyncErrorHandler
-{
-    public static void HandleException(Exception exception)
-    {
-        Debug.WriteLine(""Exception occurred: "" + exception.Message);
-    }
-}
-";
+            """
+            Could not find type 'AsyncErrorHandler'. Expected to find a class with the following signature.
+            public static class AsyncErrorHandler
+            {
+                public static void HandleException(Exception exception)
+                {
+                    Debug.WriteLine("Exception occurred: " + exception.Message);
+                }
+            }
+            """;
 
         throw new WeavingException(error);
     }
