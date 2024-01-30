@@ -11,9 +11,9 @@ public class InSameAssemblyTests
 
     public InSameAssemblyTests()
     {
-        var weavingTask = new ModuleWeaver();
+        var weaver = new ModuleWeaver();
 
-        var testResult = weavingTask.ExecuteTestRun("AssemblyToProcess.dll",
+        var testResult = weaver.ExecuteTestRun("AssemblyToProcess.dll",
             assemblyName: "InSameAssembly",
             runPeVerify: false);
         target = testResult.GetInstance("Target");

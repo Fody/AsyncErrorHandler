@@ -11,9 +11,9 @@ public class WithHandlerInReferenceTests
 
     public WithHandlerInReferenceTests()
     {
-        var weavingTask = new ModuleWeaver();
+        var weaver = new ModuleWeaver();
 
-        var testResult = weavingTask.ExecuteTestRun("AssemblyWithHandlerInReference.dll", runPeVerify: false);
+        var testResult = weaver.ExecuteTestRun("AssemblyWithHandlerInReference.dll", runPeVerify: false);
         target = testResult.GetInstance("Target");
         var errorHandler = Type.GetType("AsyncErrorHandler, AssemblyToProcess");
         exceptionField = errorHandler.GetField("Exception");
