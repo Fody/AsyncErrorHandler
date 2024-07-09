@@ -13,7 +13,8 @@ public class InSameAssemblyTests
     {
         var weaver = new ModuleWeaver();
 
-        var testResult = weaver.ExecuteTestRun("AssemblyToProcess.dll",
+        var testResult = weaver.ExecuteTestRun(
+            "AssemblyToProcess.dll",
             assemblyName: "InSameAssembly",
             runPeVerify: false);
         target = testResult.GetInstance("Target");
