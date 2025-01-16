@@ -1,6 +1,5 @@
 # <img src="/package_icon.png" height="30px"> AsyncErrorHandler.Fody
 
-[![Chat on Gitter](https://img.shields.io/gitter/room/fody/fody.svg)](https://gitter.im/Fody/Fody)
 [![NuGet Status](https://img.shields.io/nuget/v/AsyncErrorHandler.Fody.svg)](https://www.nuget.org/packages/AsyncErrorHandler.Fody/)
 
 Fody.AsyncErrorHandler is a [Fody](https://github.com/Fody/Home/) extension for weaving exception handling code into applications which use async code.
