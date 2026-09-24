@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFrameworks>net48;net8.0</TargetFrameworks>
     <DisableFody>true</DisableFody>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="FodyHelpers" Version="6.9.2" />
-    <PackageReference Include="System.Security.Permissions" Version="9.0.2" />
-    <PackageReference Include="System.Threading.AccessControl" Version="8.0.0" />
-    <PackageReference Include="xunit" Version="2.9.0" />
-    <PackageReference Include="Verify.Xunit" Version="25.3.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+    <Using Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FodyHelpers" />
+    <PackageReference Include="System.Security.Permissions" />
+    <PackageReference Include="System.Threading.AccessControl" />
+    <PackageReference Include="TUnit.Core" />
+    <PackageReference Include="TUnit.Assertions" />
+    <PackageReference Include="TUnit.Engine" />
+    <PackageReference Include="Verify.TUnit" />
     <ProjectReference Include="..\AssemblyToProcess\AssemblyToProcess.csproj" />
     <ProjectReference Include="..\AssemblyWithHandlerInReference\AssemblyWithHandlerInReference.csproj" />
     <ProjectReference Include="..\AsyncErrorHandler.Fody\AsyncErrorHandler.Fody.csproj" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.CSharp" />
   </ItemGroup>
 </Project>

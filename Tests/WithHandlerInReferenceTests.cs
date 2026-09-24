@@ -2,8 +2,11 @@
 using System.Reflection;
 using System.Threading.Tasks;
 using Fody;
-using Xunit;
+using TUnit.Assertions;
+using TUnit.Core;
 
+// the weaved assemblies expose a static exception field shared by the tests
+[NotInParallel]
 public class WithHandlerInReferenceTests
 {
     FieldInfo exceptionField;
@@ -19,15 +22,15 @@ public class WithHandlerInReferenceTests
         exceptionField = errorHandler.GetField("Exception");
     }
 
-    [Fact]
+    [Test]
     public async Task Method()
     {
         ClearException();
         await target.Method();
-        Assert.Null(GetException());
+        await Assert.That(GetException()).IsNull();
     }
 
-    [Fact]
+    [Test]
     public async Task MethodWithThrow()
     {
         ClearException();
@@ -38,18 +41,18 @@ public class WithHandlerInReferenceTests
         catch
         {
         }
-        Assert.NotNull(GetException());
+        await Assert.That(GetException()).IsNotNull();
     }
 
-    [Fact]
+    [Test]
     public async Task MethodGeneric()
     {
         ClearException();
         await target.MethodGeneric();
-        Assert.Null(GetException());
+        await Assert.That(GetException()).IsNull();
     }
 
-    [Fact]
+    [Test]
     public async Task MethodWithThrowGeneric()
     {
         ClearException();
@@ -60,7 +63,7 @@ public class WithHandlerInReferenceTests
         catch
         {
         }
-        Assert.NotNull(GetException());
+        await Assert.That(GetException()).IsNotNull();
     }
 
     void ClearException()
